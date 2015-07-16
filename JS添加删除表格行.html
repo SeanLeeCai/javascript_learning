@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title> new document </title>  
+  <meta http-equiv="Content-Type" content="text/html; charset=gbk"/>   
+  <script type="text/javascript"> 
+  
+      window.onload = function(){
+                  
+     // 鼠标移动改变背景,可以通过给每行绑定鼠标移上事件和鼠标移除事件来改变所在行背景色。
+         var tr = document.getElementsByTagName('tr');
+         for(var i in tr){
+             tr[i].onmouseover = function(){
+                 this.style.backgroundColor = "#f2f2f2";
+             }
+             tr[i].onmouseout = function(){
+                 this.style.backgroundColor = "#fff";
+             }
+         }
+		
+     
+	 
+	 }
+     
+      // 编写一个函数，供添加按钮调用，动态在表格的最后一行添加子节点；
+     function addone(){
+         //寻找要插入的table表标签
+         var table = document.getElementById("table");
+         //创建节点
+         var newline = document.createElement("tr");
+         var number = document.createElement("td");
+         var name = document.createElement("td");    
+         var op = document.createElement("td");
+         var a = document.createElement("a");
+         //设置节点属性
+         number.innerHTML = null;
+         name.innerHTML = null;
+         a.setAttribute("href","javascript:;");
+         a.setAttribute("onclick","DEL(this)");
+         a.innerHTML = "删除";
+         //添加节点
+         table.appendChild(newline);
+         newline.appendChild(number);
+         newline.appendChild(name);
+         newline.appendChild(op);
+         op.appendChild(a);
+         
+         //填充新增行内容
+         //存在问题：根据行数决定学号，可能会因为删除某行减少行数，再次增加行数时出现学号重复情况
+         var tr = document.getElementsByTagName('tr');
+         if(tr.length<=10){
+             number.innerHTML = "xh00" + (tr.length-1);
+         }else if(tr.length<=100){
+             number.innerHTML = "xh0" + (tr.length-1);
+         }else{
+             number.innerHTML = "xh" + (tr.length-1);
+         }
+         
+         //新增加的行属于加载后，不在onload范围内，需自行添加鼠标效果
+         for(var i in tr){
+             tr[i].onmouseover = function(){
+                 this.style.backgroundColor = "#f2f2f2";
+             }
+             tr[i].onmouseout = function(){
+                 this.style.backgroundColor = "#fff";
+             }
+         }
+     }
+    		
+   	
+     // 创建删除函数
+     function DEL(node){
+         var x = node.parentNode.parentNode;//节点所在行，a->td->tr
+         var p = x.parentNode.removeChild(x);
+         p = null;
+     }
+
+  </script> 
+ </head> 
+ <body> 
+	   <table border="1" width="50%" id="table">
+	   <tr>
+		<th>学号</th>
+		<th>姓名</th>
+		<th>操作</th>
+	   </tr>  
+
+	   <tr>
+		<td>xh001</td>
+		<td>王小明</td>
+		<td><a href="javascript:;" onclick="DEL(this)">删除</a></td>   <!--在删除按钮上添加点击事件  -->
+	   </tr>
+
+	   <tr>
+		<td>xh002</td>
+		<td>刘小芳</td>
+		<td><a href="javascript:;" onclick="DEL(this)">删除</a></td>   <!--在删除按钮上添加点击事件  -->
+	   </tr>  
+
+	   </table>
+	   <input type="button" value="添加一行" onclick="addone()"  />   <!--在添加按钮上添加点击事件  -->
+ </body>
+</html>
+
