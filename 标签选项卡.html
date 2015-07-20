@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>实践题 - 选项卡</title>
+    <style type="text/css">
+     /* CSS样式制作 */
+	*{margin: 0;padding: 0;font: normal 15px "微软雅黑";color:#000000;}
+       ul{list-style-type: none;}/*去掉前面的点*/
+       a{text-decoration: none;}/*去掉下划线*/
+
+       #tabs{width: 300px;height: 190px;margin: 20px auto;}
+       #ult{list-style:none;border-bottom:2px saddlebrown solid;
+           height:30px;line-height:30px; display:block;}
+       #ult li{background:#fff;cursor:pointer;float:left;list-style:none;
+           height:28px;line-height:28px;margin:0px 3px;width:60px;
+           border:1px solid #aaa;border-bottom:none;display:inline-block;text-align:center;}
+       #ult li .on{border-top:2px solid saddlebrown ;border-bottom:2px solid #fff;}
+       #tabs div{height:120px;line-height:25px;padding:5px;
+           border:1px solid #336699;border-top:none;}
+       #tabs div li{height: 30px;line-height: 30px;text-indent: 8px;}
+       .hide{display: none;}
+    </style>
+    <script type="text/javascript">
+         
+    // JS实现选项卡切换
+    window.onload = function(){
+        var tab = document.getElementById("tabs");
+        var ul = tab.getElementsByTagName("ul")[0];
+        var lis = ul.getElementsByTagName("li");
+        var divs = tab.getElementsByTagName("div");
+        
+        for(var i = 0;i<lis.length;i++){
+            lis[i].index = i;
+            lis[i].onmouseover = function(){
+                for(var j = 0;j<lis.length;j++){
+                    lis[j].className = "";
+                    divs[j].className = "hide";
+                }
+                this.className = "on";
+                divs[this.index].className = "";
+            }
+        };
+    }
+    </script>
+ 
+</head>
+<body>
+<!-- HTML页面布局 -->
+<div id="tabs"><!--选项卡盒子-->
+    <ul id="ult">
+        <li class="on">房产</li>
+        <li>家居</li>
+        <li>二手房</li>
+    </ul>
+    <div><!--内容盒子：选项卡1-->
+        <ul>
+            <li><a href="javascript:;">275万购昌平邻铁三居 总价20万买一居</a></li>
+            <li><a href="javascript:;">200万内购五环三居 140万安家东三环</a></li>
+            <li><a href="javascript:;">北京首现零首付楼盘 53万购东5环50平</a></li>
+            <li><a href="javascript:;">京楼盘直降5000 中信府 公园楼王现房</a></li>
+        </ul>
+    </div>
+    <div class="hide"><!--内容盒子：选项卡2-->
+        <ul>
+            <li><a href="javascript:;">40平出租屋大改造 美少女的混搭小窝</a></li>
+            <li><a href="javascript:;">经典清新简欧爱家 90平老房焕发新生</a></li>
+            <li><a href="javascript:;">新中式的酷色温情 66平撞色活泼家居</a></li>
+            <li><a href="javascript:;">瓷砖就像选好老婆 卫生间烟道的设计</a></li>
+        </ul>
+    </div>
+    <div class="hide"><!--内容盒子：选项卡3-->
+        <ul>
+            <li><a href="javascript:;">通州豪华3居260万 二环稀缺2居250w甩</a></li>
+            <li><a href="javascript:;">西3环通透2居290万 130万2居限量抢购</a></li>
+            <li><a href="javascript:;">黄城根小学学区仅260万 121平70万抛!</a></li>
+            <li><a href="javascript:;">独家别墅280万 苏州桥2居优惠价248万</a></li>
+        </ul>
+    </div>
+</div>
+
+ 
+</body>
+</html>
