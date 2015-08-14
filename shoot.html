@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Space Shooter</title>
+    <style>
+        #range{
+            position: absolute;
+            top: 0; left: 0;
+            background: url(http://pic.58pic.com/58pic/13/17/93/44G58PICAwu_1024.jpg);
+            background-size: 100%;
+            cursor: crosshair;
+            width: 100%;
+            height: 100%;
+        }
+        #img1{
+            position: absolute;
+            border: none;
+            left: 0;
+            padding: 10px;
+            height: 50px;
+            width: 50px;
+        }
+        #score{
+            font: 16px normal arial, verdana, sans-serif;
+            color: #ffffff;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="range">
+        <div id="score"></div>
+        <img src="http://img.sootuu.com/vector/2006-4/20064249177514.jpg" alt="Fire!" id="img1"/>
+    </div>
+    <script>
+        var timer = null;
+        var e1 = null;
+        var score = 0;
+        var shots = 0;
+        function moveIt() {
+            if(parseInt(e1.style.left) > (screen.width - 150)) {
+                e1.style.left = 0;
+            }
+            e1.style.left = parseInt(e1.style.left) + 6 + 'px';
+            e1.style.top = 100 + (80 * Math.sin(parseInt(e1.style.left)/50)) + 'px';
+            timer = setTimeout(moveIt, 25);
+        }
+        function scoreUp() {
+            score++;
+        }
+        function scoreboard() {
+            document.getElementById("score").innerHTML = "Shots: " + shots + " Score: " + score;
+        }
+        window.onload = function () {
+            e1 = document.getElementById("img1");
+            e1.onclick = scoreUp;
+            document.getElementById("range").onclick = function () {
+                shots++;
+                scoreboard();
+            }
+            scoreboard();
+            e1.style.left = '50px';
+            moveIt();
+        }
+    </script>
+</body>
+</html>
